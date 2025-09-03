@@ -1,11 +1,9 @@
 @import "tailwindcss";
-
-/* FFmpeg color tokens */
 :root {
-  --background: #000000; /* FFmpeg black */
-  --foreground: #ffffff; /* White text */
-  --accent: #107c10; /* FFmpeg green */
-  --accent-hover: #21d07a; /* Lighter green hover/accent */
+  --background: #000000;
+  --foreground: #ffffff;
+  --accent: #107c10;
+  --accent-hover: #21d07a;
 }
 
 @theme inline {
@@ -18,7 +16,6 @@
   --font-mono: var(--font-geist-mono);
 }
 
-/* Dark mode (if you want an alternate scheme, optional) */
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #000000;
