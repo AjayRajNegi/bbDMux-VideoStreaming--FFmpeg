@@ -1,6 +1,6 @@
 export default function HomePage() {
   return (
-    <div className="relative min-h-screen overflow-hidden">
+    <div className="relative min-h-screen overflow-hidden text-white">
       {/* Spline Background */}
       <div className="fixed inset-0 z-0">
         <iframe
@@ -13,7 +13,7 @@ export default function HomePage() {
       </div>
 
       {/* Glass Navbar */}
-      <nav className="fixed top-6 left-1/2 -translate-x-1/2 z-50 bg-ffmpeg-green/10 border border-ffmpeg-green/20 rounded-full px-4 py-3 shadow-xl backdrop-blur-md">
+      <nav className="fixed top-6 left-1/2 -translate-x-1/2 z-50 border rounded-full px-4 py-3 shadow-xl backdrop-blur-md">
         <div className="flex items-center justify-between">
           <div className="flex items-center">
             <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none">
@@ -27,7 +27,9 @@ export default function HomePage() {
               />
               <circle cx="12" cy="12" r="3" fill="#107C10" />
             </svg>
-            <span className="ml-2 text-sm font-medium">FFmpegLab</span>
+            <span className="ml-2 text-sm font-medium text-white">
+              FFmpegLab
+            </span>
           </div>
           <div className="hidden md:flex items-center space-x-6 text-xs text-gray-300 ml-8">
             {["Portfolio", "3D Design", "Animation", "Lab", "Connect"].map(

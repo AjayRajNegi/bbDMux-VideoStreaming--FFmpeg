@@ -1,0 +1,39 @@
+generator client {
+    provider = "prisma-client-js"
+    output   = "../lib/generated/prisma"
+}
+
+datasource db {
+    provider = "postgresql"
+    url      = env("DATABASE_URL")
+}
+
+model User {
+    id        String   @id
+    name      String
+    email     String
+    createdAt DateTime
+    updatedAt DateTime
+
+    role String?
+
+    file File[]
+
+    @@unique([email])
+    @@map("user")
+}
+
+model File {
+    id     String  @id
+    name   String
+    size   Float
+    format String?
+
+    createdAt DateTime
+    updatedAt DateTime @updatedAt
+
+    User   User?   @relation(fields: [userId], references: [id])
+    userId String?
+
+    @@unique([name])
+}
