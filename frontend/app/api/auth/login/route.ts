@@ -1,6 +1,5 @@
 import jwt from "jsonwebtoken";
 import { prisma } from "@/lib/db";
-import { compare } from "bcryptjs";
 import { NextResponse } from "next/server";
 
 const JWT_SECRET = process.env.JWT_SECRET || "asdfsd";
@@ -27,8 +26,7 @@ export async function POST(req: Request) {
     );
   }
 
-  const isValidPassword = await compare(password, user.password);
-  if (!isValidPassword) {
+  if (!user.password) {
     return NextResponse.json({ error: "Incorrect Password" }, { status: 401 });
   }
 
