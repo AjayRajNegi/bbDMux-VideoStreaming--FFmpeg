@@ -8,6 +8,7 @@ const JWT_EXPIRES_IN = Number(process.env.JWT_EXPIRES_IN) || 499234;
 
 export async function POST(req: Request) {
   const { email, password } = await req.json();
+  console.log(email, password);
 
   const user = await prisma.user.findUnique({
     where: {
