@@ -1,9 +1,9 @@
 "use client";
-import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 
 export default function Profile() {
-  const [user, setUser] = useState<{ userEmail: string } | null>(null);
+  const [user, setUser] = useState<{ email: string } | null>(null);
   const router = useRouter();
 
   useEffect(() => {
@@ -16,9 +16,9 @@ export default function Profile() {
         router.push("/login");
       }
     };
-
     fetchUser();
   }, [router]);
+
   const handleLogout = async () => {
     await fetch(`/api/auth/logout`, {
       method: "POST",
@@ -29,7 +29,7 @@ export default function Profile() {
   return user ? (
     <div>
       <h2>User Information</h2>
-      <p>UserEmail: {user.userEmail}</p>
+      <p className="text-black">UserEmail: {user.email}</p>
       <button onClick={handleLogout}>Logout</button>
     </div>
   ) : (

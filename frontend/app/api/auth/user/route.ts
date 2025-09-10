@@ -2,9 +2,11 @@ import { NextResponse } from "next/server";
 import { parseAuthCookie, verifyJwt } from "@/utils/jwt";
 
 export async function GET(request: Request) {
+  console.log(request.headers.get("cookie"));
   const token = parseAuthCookie(request.headers.get("cookie"));
-  const payload = token ? verifyJwt(token) : null;
+  const payload = token ? await verifyJwt(token) : null;
 
+  console.log(payload);
   if (!payload) {
     return NextResponse.json({ error: "Unauthenticated" }, { status: 401 });
   }

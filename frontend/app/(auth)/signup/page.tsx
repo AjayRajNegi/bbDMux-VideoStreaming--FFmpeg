@@ -26,6 +26,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
 
 const formSchema = z.object({
+  name: z.string().min(1, "Name is required"),
   email: z.string().email("Email is required"),
   password: z.string().min(1, "Password is required"),
 });
@@ -36,6 +37,7 @@ export default function LoginPage() {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
+      name: "",
       email: "",
       password: "",
     },
@@ -43,7 +45,7 @@ export default function LoginPage() {
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
-      const response = await fetch("/api/auth/login", {
+      const response = await fetch("/api/auth/signup", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(values),
@@ -74,10 +76,23 @@ export default function LoginPage() {
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
               <FormField
                 control={form.control}
+                name="name"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Name</FormLabel>
+                    <FormControl>
+                      <Input placeholder="Enter name" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
                 name="email"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>email</FormLabel>
+                    <FormLabel>Email</FormLabel>
                     <FormControl>
                       <Input placeholder="Enter email" {...field} />
                     </FormControl>
@@ -105,7 +120,7 @@ export default function LoginPage() {
               />
 
               <Button type="submit" className="w-full">
-                Login
+                Signup
               </Button>
             </form>
           </Form>
@@ -113,10 +128,10 @@ export default function LoginPage() {
         <CardFooter className="text-sm text-gray-500 justify-center">
           Don&apos;t have an account?{" "}
           <Link
-            href="/signup"
+            href="/login"
             className="ml-1 font-medium text-primary hover:underline"
           >
-            Sign up
+            Login
           </Link>
         </CardFooter>
       </Card>

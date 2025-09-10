@@ -5,17 +5,10 @@ import { parseAuthCookie, verifyJwt } from "./utils/jwt";
 export async function middleware(request: NextRequest) {
   const token = parseAuthCookie(request.headers.get("cookie"));
 
-  const unprotectedRoutes = ["/login", "/"];
-  const isUnprotectedRoute = unprotectedRoutes.includes(
-    request.nextUrl.pathname
-  );
+  const protectedRoutes = ["/upload", "/watch", "/profile"];
+  const isProtectedRoute = protectedRoutes.includes(request.nextUrl.pathname);
 
-  const authenticatedRoutes = ["/"];
-  const isAuthenticatedRoute = authenticatedRoutes.includes(
-    request.nextUrl.pathname
-  );
-
-  if (!isUnprotectedRoute && !isAuthenticatedRoute) {
+  if (isProtectedRoute) {
     if (!token) {
       return NextResponse.redirect(new URL("/login", request.url));
     }
@@ -27,9 +20,13 @@ export async function middleware(request: NextRequest) {
     }
   }
 
-  if (isUnprotectedRoute) {
-    if (token && verifyJwt(token)) {
-      return NextResponse.redirect(new URL("/", request.url));
+  const unprotectedRoutes = ["/login"];
+  if (unprotectedRoutes.includes(request.nextUrl.pathname)) {
+    if (token) {
+      const payload = await verifyJwt(token);
+      if (payload) {
+        return NextResponse.redirect(new URL("/profile", request.url));
+      }
     }
   }
 
