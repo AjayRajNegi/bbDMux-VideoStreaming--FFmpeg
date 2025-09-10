@@ -18,12 +18,12 @@ import {
 } from "@/components/ui/card";
 
 import * as z from "zod";
+import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { zodResolver } from "@hookform/resolvers/zod";
-import Link from "next/link";
 
 const formSchema = z.object({
   name: z.string().min(1, "Name is required"),
