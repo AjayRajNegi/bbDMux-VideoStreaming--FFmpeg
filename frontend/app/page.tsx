@@ -2,7 +2,7 @@ export default function HomePage() {
   return (
     <div className="relative min-h-screen overflow-hidden text-white">
       {/* Spline Background */}
-      <div className="fixed inset-0 z-0">
+      {/* <div className="fixed inset-0 z-0">
         <iframe
           src="https://my.spline.design/reactiveorb-s0GzgSco0uSVSXvwMHuJvPQs/"
           frameBorder="0"
@@ -10,7 +10,7 @@ export default function HomePage() {
           height="100%"
           className="w-full h-full"
         />
-      </div>
+      </div> */}
 
       {/* Glass Navbar */}
       <nav className="fixed top-6 left-1/2 -translate-x-1/2 z-50 border rounded-full px-4 py-3 shadow-xl backdrop-blur-md">
@@ -114,7 +114,7 @@ export default function HomePage() {
             </div>
 
             {/* Right Placeholder */}
-            <div className="hidden lg:block">{/* Orb space */}</div>
+            {/* <div className="hidden lg:block"></div> */}
           </div>
         </div>
       </div>
